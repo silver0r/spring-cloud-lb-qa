@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: zookeeper:3.6.1
+    restart: always
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+
+  zkui:
+    image: qnib/plain-zkui
+    environment:
+      - ZK_SERVER=zookeeper:2181
+    ports:
+      - 9090:9090
+    links:
+      - zookeeper

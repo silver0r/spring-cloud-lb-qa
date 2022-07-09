@@ -1,0 +1,37 @@
+plugins {
+    id("java")
+    id("application")
+    id("io.spring.dependency-management") version "${springDependencyManagement}"
+    id("org.springframework.boot") version "${springBoot}"
+}
+
+group 'com.silver0r'
+version '1.0-SNAPSHOT'
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudDependencies}")
+    }
+
+    dependencies {
+        dependency("org.projectlombok:lombok:${lombok}")
+    }
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.cloud:spring-cloud-starter-zookeeper-discovery")
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    compileOnly("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+test {
+    useJUnitPlatform()
+}

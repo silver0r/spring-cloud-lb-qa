@@ -1,0 +1,37 @@
+server:
+  port: 8080
+  shutdown: graceful
+  error:
+    whitelabel:
+      enabled: true
+
+spring:
+  application:
+    name: api-gateway
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  cloud:
+    zookeeper:
+      enabled: true
+      discovery:
+        enabled: true
+      connect-string: localhost:2181
+    loadbalancer:
+      cache:
+        enabled: false
+      sticky-session:
+        add-service-instance-cookie: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: api
+          uri: lb://api
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}

@@ -1,0 +1,30 @@
+server:
+  port: 8081
+  shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: api
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  cloud:
+    zookeeper:
+      enabled: true
+      discovery:
+        enabled: true
+      connect-string: localhost:2181
+    loadbalancer:
+      cache:
+        enabled: false
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false

@@ -1,0 +1,43 @@
+buildscript {
+    ext {
+        springBoot = "2.6.6"
+        springCloudDependencies = "2021.0.2"
+        springDependencyManagement = "1.0.11.RELEASE"
+        lombok = "1.18.24"
+    }
+}
+
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = "com.silver0r"
+
+subprojects {
+    project.group = "com.silver0r"
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        all*.exclude group: "org.slf4j", module: "slf4j-log4j12"
+        all*.exclude group: "log4j", module: "log4j"
+        all*.exclude group: "org.apache.logging.log4j"
+        all*.exclude group: "commons-logging"
+        all*.exclude group: "com.naver.nelo2", module: "logback-classic"
+        all*.exclude group: "com.naver.nelo2", module: "logback-core"
+        all*.exclude group: "ch.qos.logback", module: "slf4j-api"
+    }
+
+    clean {
+        delete "out"
+    }
+}

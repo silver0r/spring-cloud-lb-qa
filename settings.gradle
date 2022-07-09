@@ -1,0 +1,4 @@
+rootProject.name = 'spring-cloud-lb-qa'
+include 'api-gateway'
+include 'api'
+
